@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sn-grid/static/css/main.a1a76d44.css",
+    "main.js": "/sn-grid/static/js/main.5f85b906.js",
+    "index.html": "/sn-grid/index.html",
+    "main.a1a76d44.css.map": "/sn-grid/static/css/main.a1a76d44.css.map",
+    "main.5f85b906.js.map": "/sn-grid/static/js/main.5f85b906.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a1a76d44.css",
+    "static/js/main.5f85b906.js"
+  ]
+}
