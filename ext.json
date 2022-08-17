@@ -1,11 +1,11 @@
 {
-  "identifier": "nienow.columns",
+  "identifier": "nienow.grid",
   "name": "Simple Grid",
   "content_type": "SN|Component",
   "area": "editor-editor",
   "version": "0.1.0",
   "description": "Simple editor with grid layout",
-  "url": "http://localhost:3000",
+  "url": "https://nienow.github.io/sn-grid/",
   "download_url": "",
   "latest_url": "",
   "thumbnail_url": ""
