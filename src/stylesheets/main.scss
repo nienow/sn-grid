@@ -38,9 +38,9 @@ html {
     cursor: pointer;
   }
 
-  div {
-    padding: 5px 10px;
-  }
+  //div {
+  //  padding: 5px 10px;
+  //}
 }
 
 .nienow-editor__content {
@@ -88,4 +88,24 @@ html {
   border-right: 1px solid var(--sn-stylekit-border-color);
   display: flex;
   flex: 1 0 auto;
+}
+
+.test-controls {
+  border: 1px solid var(--sn-stylekit-border-color);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  margin: 3px 5px;
+
+  div {
+    padding: 0 10px;
+  }
+
+  button:first-child {
+    border-right: 1px solid var(--sn-stylekit-border-color);
+  }
+
+  button:last-child {
+    border-left: 1px solid var(--sn-stylekit-border-color);
+  }
 }

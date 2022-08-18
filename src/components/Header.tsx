@@ -77,13 +77,18 @@ const Header = (params: Params) => {
 
   return (
     <div className="nienow-editor__header">
-      <button onClick={checkLastColumn}>-</button>
-      <div>{params.data.columns} columns</div>
-      <button onClick={addColumn}>+</button>
-      <div>|</div>
-      <button onClick={checkLastRow}>-</button>
-      <div>{params.data.rows} rows</div>
-      <button onClick={addRow}>+</button>
+      <div className="test-controls">
+        <button onClick={checkLastColumn}>-</button>
+        <div>{params.data.columns} column(s)</div>
+        <button onClick={addColumn}>+</button>
+      </div>
+
+      <div className="test-controls">
+        <button onClick={checkLastRow}>-</button>
+        <div>{params.data.rows} row(s)</div>
+        <button onClick={addRow}>+</button>
+      </div>
+
     </div>
   );
 }
