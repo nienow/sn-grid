@@ -17,7 +17,23 @@ const DialogContainer = styled.div`
   margin-top: 100px;
   max-width: 300px;
   background-color: #ccc;
-  padding: 50px;
+  padding: 20px 50px;
+`
+
+const DialogButton = styled.button`
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+`
+
+const DialogActions = styled.div`
+  display: flex;
+  margin-top: 20px;
 `
 
 const SimpleDialog = ({children, open}) => {
@@ -52,14 +68,14 @@ export const DialogProvider = ({children}) => {
     const confirmContents = (
       <>
         <div>{text}</div>
-        <div>
-          <button onClick={() => {
+        <DialogActions>
+          <DialogButton onClick={() => {
             action();
             closeDialog()
           }}>OK
-          </button>
-          <button onClick={closeDialog}>Cancel</button>
-        </div>
+          </DialogButton>
+          <DialogButton onClick={closeDialog}>Cancel</DialogButton>
+        </DialogActions>
       </>
     )
 
@@ -70,10 +86,10 @@ export const DialogProvider = ({children}) => {
     const confirmContents = (
       <>
         <div>{text}</div>
-        <div>
-          <button onClick={closeDialog}>OK
-          </button>
-        </div>
+        <DialogActions>
+          <DialogButton onClick={closeDialog}>OK
+          </DialogButton>
+        </DialogActions>
       </>
     )
 

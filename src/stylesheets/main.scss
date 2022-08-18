@@ -11,7 +11,7 @@ html {
   background-color: var(--sn-stylekit-background-color);
   color: var(--sn-stylekit-foreground-color);
   font-family: var(--sn-stylekit-sans-serif-font);
-  font-size: var(--sn-stylekit-base-font-size);
+  font-size: var(--sn-stylekit-font-size-editor);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -21,7 +21,6 @@ html {
 .nienow-editor {
   display: flex;
   flex-direction: column;
-  font-size: var(--sn-stylekit-font-size-editor);
   min-height: 100vh;
 }
 

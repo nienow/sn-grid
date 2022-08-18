@@ -24,7 +24,7 @@ const Header = (params: Params) => {
         return !!row[row.length - 1].text;
       });
       if (hasContent) {
-        confirm('Removing the last column will delete content? Are you sure?', () => {
+        confirm('Removing a column will delete content? Are you sure?', () => {
           removeColumn();
         })
       } else {
@@ -58,7 +58,7 @@ const Header = (params: Params) => {
       const lastRow = params.data.sections[params.data.sections.length - 1];
       const hasContent = !!lastRow.find(column => !!column.text);
       if (hasContent) {
-        confirm('Removing the last row will delete content? Are you sure?', () => {
+        confirm('Removing a row will delete content? Are you sure?', () => {
           removeRow();
         })
       } else {
