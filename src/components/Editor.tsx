@@ -27,6 +27,7 @@ const EditorRow = styled.div`
 const EditorSection = styled.div`
   border-right: 1px solid var(--sn-stylekit-border-color);
   display: flex;
+  flex-direction: column;
   flex: 1 0 auto;
 `
 
@@ -34,10 +35,7 @@ const Editor = () => {
   const [data, setData] = useState<EditorData>({rows: 2, columns: 2, sections: [[{}, {}], [{}, {}]]});
   const [editorKit, setEditorKit] = useState(null);
 
-  //console.log('run editor');
-
   useEffect(() => {
-    //console.log('useeffect');
     setEditorKit(new EditorKit({
       setEditorRawText: initializeText,
       clearUndoHistory: () => {
