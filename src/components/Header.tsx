@@ -1,6 +1,42 @@
 import React from 'react';
 import {EditorData} from "../EditorData";
 import {useDialog} from "../providers/DialogProvider";
+import styled from "styled-components";
+
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--sn-stylekit-border-color);
+`
+
+const HeaderControl = styled.div`
+  border: 1px solid var(--sn-stylekit-border-color);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  margin: 3px 5px;
+
+  div {
+    padding: 0 10px;
+  }
+
+  button:first-child {
+    border-right: 1px solid var(--sn-stylekit-border-color);
+  }
+
+  button:last-child {
+    border-left: 1px solid var(--sn-stylekit-border-color);
+  }
+`
+
+const ControlButton = styled.button`
+  color: var(--sn-stylekit-secondary-foreground-color);
+  background-color: var(--sn-stylekit-secondary-background-color);
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  cursor: pointer;
+`
 
 interface Params {
   data: EditorData;
@@ -76,20 +112,20 @@ const Header = (params: Params) => {
   };
 
   return (
-    <div className="nienow-editor__header">
-      <div className="test-controls">
-        <button onClick={checkLastColumn}>-</button>
+    <HeaderContainer>
+      <HeaderControl>
+        <ControlButton onClick={checkLastColumn}>-</ControlButton>
         <div>{params.data.columns} column(s)</div>
-        <button onClick={addColumn}>+</button>
-      </div>
+        <ControlButton onClick={addColumn}>+</ControlButton>
+      </HeaderControl>
 
-      <div className="test-controls">
-        <button onClick={checkLastRow}>-</button>
+      <HeaderControl>
+        <ControlButton onClick={checkLastRow}>-</ControlButton>
         <div>{params.data.rows} row(s)</div>
-        <button onClick={addRow}>+</button>
-      </div>
+        <ControlButton onClick={addRow}>+</ControlButton>
+      </HeaderControl>
 
-    </div>
+    </HeaderContainer>
   );
 }
 

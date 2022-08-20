@@ -4,6 +4,31 @@ import Header from "./Header";
 import Section from "./Section";
 import {EditorData} from "../EditorData";
 import {DialogProvider} from "../providers/DialogProvider";
+import styled from "styled-components";
+
+const EditorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
+const EditorContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+`
+
+const EditorRow = styled.div`
+  border-bottom: 1px solid var(--sn-stylekit-border-color);
+  display: flex;
+  flex: 1 0 auto;
+`
+
+const EditorSection = styled.div`
+  border-right: 1px solid var(--sn-stylekit-border-color);
+  display: flex;
+  flex: 1 0 auto;
+`
 
 const Editor = () => {
   const [data, setData] = useState<EditorData>({rows: 2, columns: 2, sections: [[{}, {}], [{}, {}]]});
@@ -64,26 +89,26 @@ const Editor = () => {
 
   return (
     <DialogProvider>
-      <div className="nienow-editor">
+      <EditorContainer>
         <Header data={data} saveNote={saveNote}></Header>
-        <div className="nienow-editor__content">
+        <EditorContent>
           {
             data.sections.map((row, i) => {
-              return <div className="nienow-editor__row" key={i}>
+              return <EditorRow key={i}>
                 {
                   row.map((section, j) => {
-                    return <div className="nienow-editor__column" key={j}>
+                    return <EditorSection key={j}>
                       {
                         <Section section={section} onChange={(e) => handleInputChange(e, i, j)}></Section>
                       }
-                    </div>;
+                    </EditorSection>;
                   })
                 }
-              </div>;
+              </EditorRow>;
             })
           }
-        </div>
-      </div>
+        </EditorContent>
+      </EditorContainer>
     </DialogProvider>
   );
 }
