@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import EditorKit from "@standardnotes/editor-kit";
 import Header from "./Header";
 import Section from "./Section";
-import {EditorData} from "../EditorData";
+import {EditorData, transformEditorData} from "../EditorData";
 import {DialogProvider} from "../providers/DialogProvider";
 import styled from "styled-components";
 
@@ -32,7 +32,7 @@ const EditorSection = styled.div`
 `
 
 const Editor = () => {
-  const [data, setData] = useState<EditorData>({rows: 2, columns: 2, sections: [[{}, {}], [{}, {}]]});
+  const [data, setData] = useState<EditorData>(null);
   const [editorKit, setEditorKit] = useState(null);
 
   useEffect(() => {
@@ -46,6 +46,8 @@ const Editor = () => {
       supportsFileSafe: false
     }));
 
+    // Uncomment to use test data
+    // initializeText(TestData);
   }, []);
 
   const initializeText = (text) => {
@@ -58,25 +60,11 @@ const Editor = () => {
         }
       }
     }
-    if (!parsedData) {
-      parsedData = {rows: 2, columns: 2, sections: [[{text: text || ''}, {}], [{}, {}]]};
-    }
+    parsedData = transformEditorData(parsedData, text);
     setData(parsedData);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>, row, column) => {
-    const target = event.target;
-    const value = target.value;
-    if (target.name === "title") {
-      data.sections[row][column].title = value;
-    } else {
-      data.sections[row][column].text = value;
-    }
-    saveNote();
-  };
-
   const saveNote = () => {
-    setData({...data});
     const text = JSON.stringify(data);
     try {
       editorKit?.onEditorValueChanged(text);
@@ -85,30 +73,37 @@ const Editor = () => {
     }
   };
 
-  return (
-    <DialogProvider>
-      <EditorContainer>
-        <Header data={data} saveNote={saveNote}></Header>
-        <EditorContent>
-          {
-            data.sections.map((row, i) => {
-              return <EditorRow key={i}>
-                {
-                  row.map((section, j) => {
-                    return <EditorSection key={j}>
-                      {
-                        <Section section={section} onChange={(e) => handleInputChange(e, i, j)}></Section>
-                      }
-                    </EditorSection>;
-                  })
-                }
-              </EditorRow>;
-            })
-          }
-        </EditorContent>
-      </EditorContainer>
-    </DialogProvider>
-  );
+  const saveNoteAndRefresh = () => {
+    setData({...data});
+    saveNote();
+  };
+
+  if (data) {
+    return (
+      <DialogProvider>
+        <EditorContainer>
+          <Header data={data} saveNote={saveNoteAndRefresh}></Header>
+          <EditorContent>
+            {
+              data.sections.map((row, i) => {
+                return <EditorRow key={i}>
+                  {
+                    row.map((section, j) => {
+                      return <EditorSection key={j}>
+                        {
+                          <Section section={section} saveNote={saveNote}></Section>
+                        }
+                      </EditorSection>;
+                    })
+                  }
+                </EditorRow>;
+              })
+            }
+          </EditorContent>
+        </EditorContainer>
+      </DialogProvider>
+    );
+  }
 }
 
 export default Editor

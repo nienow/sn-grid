@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SectionData} from "../EditorData";
 import styled from "styled-components";
 
@@ -27,14 +27,31 @@ const SectionTextArea = styled.textarea`
 
 interface Params {
   section: SectionData;
-  onChange: (e) => void;
+  saveNote: () => void;
 }
 
 const Section = (params: Params) => {
+  const [text, setText] = useState(params.section.text || '');
+  const [title, setTitle] = useState(params.section.title || '');
+
+  const onTitleChange = (e) => {
+    const value = e.target.value;
+    setTitle(value);
+    params.section.title = value;
+    params.saveNote();
+  };
+
+  const onTextChange = (e) => {
+    const value = e.target.value;
+    setText(value);
+    params.section.text = value;
+    params.saveNote();
+  };
+
   return (
     <>
-      <SectionTitle type="text" name="title" value={params.section.title || ''} onChange={params.onChange}/>
-      <SectionTextArea tabIndex={1} name="value" value={params.section.text || ''} onChange={params.onChange}/>
+      <SectionTitle type="text" name="title" value={title} onChange={onTitleChange}/>
+      <SectionTextArea tabIndex={1} name="value" value={text} onChange={onTextChange}/>
     </>
   );
 };
