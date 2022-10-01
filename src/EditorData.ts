@@ -27,10 +27,6 @@ export const newEditorData = (text): EditorData => {
 export const transformEditorData = (data: any, originalText: string): EditorData => {
   if (data && data.editor === NienowGrid && data.version === 1) {
     return data;
-  } else if (data && data.rows && data.columns) {
-    data.editor = NienowGrid;
-    data.version = DataVersion;
-    return data;
   } else {
     return newEditorData(originalText);
   }
