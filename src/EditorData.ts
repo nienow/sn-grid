@@ -7,27 +7,10 @@ export interface EditorData {
 }
 
 export const NienowGrid = 'nienow.grid';
+export const NienowSticky = 'nienow.sticky';
 export const DataVersion = 1;
 
 export interface SectionData {
   title?: string;
   text?: string;
 }
-
-export const newEditorData = (text): EditorData => {
-  return {
-    editor: NienowGrid,
-    version: DataVersion,
-    rows: 2,
-    columns: 2,
-    sections: [[{text: text || ''}, {}], [{}, {}]]
-  };
-};
-
-export const transformEditorData = (data: any, originalText: string): EditorData => {
-  if (data && data.editor === NienowGrid && data.version === 1) {
-    return data;
-  } else {
-    return newEditorData(originalText);
-  }
-};
