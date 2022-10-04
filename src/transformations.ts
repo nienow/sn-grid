@@ -50,16 +50,22 @@ export const transformFromSticky = (data: any): EditorData => {
   }
   newData.rows = Math.ceil(sections.length / newData.columns);
 
-  sections.forEach((section: any, index) => {
-    const row = Math.floor(index / newData.columns);
-    const column = index % newData.columns;
-    const rowArray = column > 0 ? newData.sections[row] : [];
-    rowArray.push({
-      title: section.title,
-      text: section.text
-    });
+  for (let row = 0; row < newData.rows; row++) {
+    const rowArray = [];
+    for (let col = 0; col < newData.columns; col++) {
+      const indexToFind = row * newData.columns + col;
+      const section: any = sections.find((s: any) => s.index === indexToFind);
+      if (section) {
+        rowArray.push({
+          title: section.title,
+          text: section.text
+        });
+      } else {
+        rowArray.push({});
+      }
+    }
     newData.sections[row] = rowArray;
-  });
+  }
 
   return newData;
 };
